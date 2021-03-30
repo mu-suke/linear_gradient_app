@@ -36,12 +36,26 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  double _value = 0.0;
+  double _startValue = 0.0;
+  double _endValue = 0.0;
 
-  final _linearGradient = LinearGradient(
-      colors: [Color(0xfffc00ff), Color(0xff00dbde)], stops: [0.0, 0.7]);
+  void _changeSlider(double e) => setState(() {
+        _value = e;
+      });
+
+  void _startSlider(double e) => setState(() {
+        _startValue = e;
+      });
+
+  void _endSlider(double e) => setState(() {
+        _endValue = e;
+      });
 
   @override
   Widget build(BuildContext context) {
+    final _linearGradient = LinearGradient(
+        colors: [Color(0xfffc00ff), Color(0xff00dbde)], stops: [0.0, _value]);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -50,23 +64,27 @@ class _MyHomePageState extends State<MyHomePage> {
         decoration: BoxDecoration(gradient: _linearGradient),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
-          ),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  '${_value.toInt()}',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+
+                Slider(
+                  label: '${_value}',
+                  min: 0,
+                  max: 1,
+                  value: _value,
+                  activeColor: Colors.orange,
+                  inactiveColor: Colors.blueAccent,
+                  divisions: 10,
+                  onChanged: _changeSlider,
+                  onChangeStart: _startSlider,
+                  onChangeEnd: _endSlider,
+                )
+              ]),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
