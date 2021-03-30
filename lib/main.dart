@@ -67,17 +67,16 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  '${_value.toInt()}',
+                  'Stops: $_value',
                   style: Theme.of(context).textTheme.headline4,
                 ),
-
                 Slider(
-                  label: '${_value}',
+                  label: '$_value',
                   min: 0,
                   max: 1,
                   value: _value,
-                  activeColor: Colors.orange,
-                  inactiveColor: Colors.blueAccent,
+                  activeColor: Color(0xff00dbde),
+                  inactiveColor: Color(0xfffc00ff),
                   divisions: 10,
                   onChanged: _changeSlider,
                   onChangeStart: _startSlider,
